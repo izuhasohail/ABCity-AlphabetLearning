@@ -28,10 +28,6 @@ Children have the following features and options to work with
 - Neural networks were used to predict the top 10 predictions of the letters.
 - We check if the letter displayed is the same as the top letter predicted.
 
-#### Parent Console
-- A dummy page that can be developed to make the application complete stack and make courses for children to understand more about the stats.
-
-
 ## Run Locally
 To run the application, use the following commands.
 
