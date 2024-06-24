@@ -78,7 +78,7 @@ const HeaderR = () => {
                 >
                   <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                 </svg>
-                <p className="text-lg font-semibold ml-2">Learno</p>
+                <p className="text-lg font-semibold ml-2">ABCity</p>
                 <img
                   src="/vite.svg"
                   alt="logo"

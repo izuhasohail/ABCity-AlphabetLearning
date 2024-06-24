@@ -16,7 +16,7 @@ export function BoxBg() {
       <h1
         className={cn("md:text-8xl font-bold text-6xl text-white relative z-20")}
       >
-        Learno
+        ABCity
       </h1>
 
       <p className="text-center mt-2 text-xl text-purple-400 font-semibold  relative z-20">
