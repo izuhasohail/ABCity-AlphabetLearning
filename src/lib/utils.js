@@ -34,7 +34,7 @@ export const startIntro = () => {
       steps: [
         {
           title: "Welcome",
-          intro: "Welcome to learno! Lets get started 👋",
+          intro: "Welcome to ABCity! Lets get started 👋",
           tooltipClass: "black-tooltip",
         },
         {

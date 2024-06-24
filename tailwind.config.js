@@ -30,6 +30,7 @@ module.exports = {
         oliveGreen:"#386641",
         lightGreen:"#6a994e",
         parrotGreen:"#a7c957",
+        blueSecondary:"#709EBD",
         
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
