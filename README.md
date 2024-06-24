@@ -1,5 +1,5 @@
 
-# Alphabet Learning Application for children
+# ABCity- Alphabet Learning Application for children
 
 This Application is meant to help children learn and practice letters.
 This application shows letters corresponding to images, and using neural networks, we can predict what letter is drawn by the user.
@@ -39,7 +39,7 @@ To run the application, use the following commands.
 //backend
 cd backend
 npm i
-npm run dev
+npm start
 
 //frontend
 npm i
@@ -48,7 +48,5 @@ npm run dev
 
 ```
 
-## 🔗 Links
-Github Repo:
-https://github.com/Chirag2203/DoubleImageEncrytion
+
 
