@@ -66,6 +66,7 @@ const ChildConsole = () => {
     if (recognizedLetter) {
       const newIndex = alphabetData.findIndex((item) => item.letter === recognizedLetter);
       setCurrentIndex(newIndex);
+      drawingPathsRef.current = [];
     }
   }, [recognizedLetter]);
 
@@ -109,6 +110,7 @@ const ChildConsole = () => {
   const handleNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % alphabetData.length);
     drawingPathsRef.current = [];
+    setRecognizedLetter(""); // Reset recognized letter
   };
 
   const handlePrevious = () => {
@@ -116,6 +118,7 @@ const ChildConsole = () => {
       (prevIndex) => (prevIndex - 1 + alphabetData.length) % alphabetData.length
     );
     drawingPathsRef.current = [];
+    setRecognizedLetter(""); // Reset recognized letter
   };
 
   const handleClear = () => {
@@ -243,6 +246,7 @@ const ChildConsole = () => {
   };
 
   const { letter, word, image } = alphabetData[currentIndex];
+  const displayLetter = recognizedLetter || letter;
 
   return (
     <div className="console p-4">
@@ -297,7 +301,7 @@ const ChildConsole = () => {
             <FaSpinner className="animate-spin text-9xl" />
           ) : (
             <p className="text-black text-9xl font-bold">
-              {recognizedLetter || letter}
+              {displayLetter}
             </p>
           )}
         </div>

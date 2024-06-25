@@ -1,5 +1,5 @@
 ///////////////////////////////////////
-
+//rectified linear unit
 function relu(x) {
     return Math.max(0, x);
   }
