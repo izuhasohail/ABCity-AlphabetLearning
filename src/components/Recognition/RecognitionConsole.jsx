@@ -11,7 +11,7 @@ import cheer from "../../assets/crowd-cheering.mp3";
 import sadSound from "../../assets/sad-sound.mp3"
 import { speakOnLoad, speakWord } from "@/lib/utils";
 import axios from "axios";
-import Loader from "../shared/Loader";
+import { Loader } from "../child/ChildConsole";
 
 const RecognitionConsole = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -27,7 +27,7 @@ const RecognitionConsole = () => {
     letter: "A",
   });
   const [chatHistory, setChatHistory] = useState([]);
-  const[ loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Update currLetter whenever currentIndex changes
   useEffect(() => {
@@ -75,42 +75,49 @@ const RecognitionConsole = () => {
     };
   }, []);
 
-  const handleCheck = () => {
-    const firstPredictionText = document
-      .getElementById("prediction-0")
-      .textContent.trim();
-  
-    const { letter } = alphabetData[currentIndex];
-  
-    if (firstPredictionText.toUpperCase() === currLetter.trim().toUpperCase()) {
-      toast.success("Prediction matches the displayed letter!");
-      clearCanvas();
-      setCorrect(true);
-      setWrongLetter(false);
-  
-      // Update local storage for correct writings
-      const localStorageData = JSON.parse(localStorage.getItem("writingStats")) || { correct: 0, wrong: 0, letter:"A" };
-      localStorageData.correct += 1;
-      localStorage.setItem("writingStats", JSON.stringify(localStorageData));
-    } else {
-      setWrongLetter(true);
-      setCorrect(false);
-      setWrongLetterWord(firstPredictionText);
-      toast.error("Prediction does not match the displayed letter.");
-  
-      // Play sad sound
-      const audio = new Audio(sadSound);
-      audio.play();
-  
-      // Update local storage for wrong writings
-      const localStorageData = JSON.parse(localStorage.getItem("writingStats")) || { correct: 0, wrong: 0, letter:"A" };
-      localStorageData.wrong += 1;
-      localStorage.setItem("writingStats", JSON.stringify(localStorageData));
+  const handleCheck = async () => {
+    setLoading(true); // Start loading
+    try {
+      const firstPredictionText = document
+        .getElementById("prediction-0")
+        .textContent.trim();
+
+      const { letter } = alphabetData[currentIndex];
+
+      if (firstPredictionText.toUpperCase() === currLetter.trim().toUpperCase()) {
+        toast.success("Prediction matches the displayed letter!");
+        clearCanvas();
+        setCorrect(true);
+        setWrongLetter(false);
+
+        // Update local storage for correct writings
+        const localStorageData = JSON.parse(localStorage.getItem("writingStats")) || { correct: 0, wrong: 0, letter: "A" };
+        localStorageData.correct += 1;
+        localStorage.setItem("writingStats", JSON.stringify(localStorageData));
+      } else {
+        setWrongLetter(true);
+        setCorrect(false);
+        setWrongLetterWord(firstPredictionText);
+        toast.error("Prediction does not match the displayed letter.");
+
+        // Play sad sound
+        const audio = new Audio(sadSound);
+        audio.play();
+
+        // Update local storage for wrong writings
+        const localStorageData = JSON.parse(localStorage.getItem("writingStats")) || { correct: 0, wrong: 0, letter: "A" };
+        localStorageData.wrong += 1;
+        localStorage.setItem("writingStats", JSON.stringify(localStorageData));
+      }
+
+      await sendRequest(); // Send API request
+    } catch (error) {
+      toast.error("Error during letter recognition.");
+      console.error(error);
+    } finally {
+      setLoading(false); // Stop loading
     }
-  
-    sendRequest();
   };
-  
 
   useEffect(() => {
     const message = "Hello buddy! Please write in the specified area.";
@@ -171,7 +178,6 @@ const RecognitionConsole = () => {
     const message = `The student has written ${statisticsLocal.letter} ${statisticsLocal.correct} times correctly and ${statisticsLocal.wrong} times wrong. `;
     console.log(message)
     try {
-      setLoading(true)
       const options = {
         method: "POST",
         body: JSON.stringify({
@@ -211,12 +217,9 @@ const RecognitionConsole = () => {
       setAiText(data)
       // speak this ai text
       speakWord(data)
-      setLoading(false)
     } catch (error) {
-      setLoading(false)
       console.error(error);
       toast.error("Failed to send request to the server.");
-      
     }
   };
 
@@ -282,8 +285,6 @@ const RecognitionConsole = () => {
       {!loading && correct && <ConfettiExplosion numberOfPieces={200} duration={6000} />}
       {!loading && correct && <ConfettiExplosion numberOfPieces={400} duration={4000} />}
      
-
-      
       <div className="pt-4 min-h-screen"
         dangerouslySetInnerHTML={{
           __html: `
@@ -383,7 +384,6 @@ const RecognitionConsole = () => {
           `,
         }}
       />
-
     </div>
   );
 };

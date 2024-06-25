@@ -423,3 +423,4 @@ const ChildConsole = () => {
 };
 
 export default ChildConsole;
+export {Loader}
