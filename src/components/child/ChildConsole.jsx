@@ -6,6 +6,13 @@ import { alphabetData } from "../../utils/data";
 import { speakWord, startIntro } from "@/lib/utils";
 import { BsFillMicFill } from "react-icons/bs";
 
+// Loader component
+const Loader = () => (
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <FaSpinner className="animate-spin text-6xl text-white" />
+  </div>
+);
+
 const ChildConsole = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -250,6 +257,7 @@ const ChildConsole = () => {
 
   return (
     <div className="console p-4">
+      {isLoading && <Loader />}
       <div className="utility-bar-2 flex justify-between items-center mb-4 ">
         <p className="text-lg font-bold">Learn Alphabets</p>
         <div className="flex items-center">
@@ -347,7 +355,7 @@ const ChildConsole = () => {
       </div>
 
       {isModalOpen && (
-        <div className="modal-bg">
+        <div className="modal-bg z-50">
           <div className="modal-content">
             <h2 className="text-lg font-bold mb-4">Select a Letter</h2>
             <div className="grid grid-cols-4 gap-2">

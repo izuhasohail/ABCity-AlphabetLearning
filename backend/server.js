@@ -169,8 +169,15 @@ app.post('/api/recognize', async (req, res) => {
     // Check if transcription status is completed
     if (response.status === 'completed') {
       const transcription = response.text;
-      console.log('Transcription:', transcription);
-      res.json({ transcription });
+
+      if(transcription==''){
+        res.json({transcription:'letter not recognized'});
+      }
+      else{
+        console.log('Transcription:', transcription);
+        res.json({ transcription });
+      }
+      
     } else {
       console.log('Transcription status:', response.status);
       res.status(500).send('Transcription not completed. Please try again later.');
