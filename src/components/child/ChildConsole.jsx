@@ -246,7 +246,7 @@ const ChildConsole = () => {
 
   return (
     <div className="console p-4">
-      <div className="utility-bar-2 flex justify-between items-center mb-4">
+      <div className="utility-bar-2 flex justify-between items-center mb-4 ">
         <p className="text-lg font-bold">Learn Alphabets</p>
         <div className="flex items-center">
           <Button
@@ -263,7 +263,7 @@ const ChildConsole = () => {
           >
             <BsFillMicFill
               className={`w-6 h-6 ${
-                isListening ? "text-bright" : "text-blue-500"
+                isListening ? "text-bright" : " "
               }`}
             />
           </button>

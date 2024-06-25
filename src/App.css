@@ -8,10 +8,10 @@
 }
 
 .utility-bar{
-  @apply w-3/4 text-3xl font-semibold bg-gradient-to-r from-purple-600 py-2 rounded-md to-purple-300 px-4 flex sm:flex-row flex-col justify-between
+  @apply w-3/4 text-3xl font-semibold bg-gradient-to-r from-cyan-500 py-2 rounded-md to-purple-800 px-4 flex sm:flex-row flex-col justify-between
 }
 .utility-bar-2{
-  @apply text-3xl font-semibold bg-gradient-to-r from-purple-600 py-2 rounded-md to-purple-300 px-4 flex sm:flex-row flex-col justify-between
+  @apply text-3xl font-semibold bg-gradient-to-r from-cyan-500 py-2 rounded-md to-purple-800 px-4 flex sm:flex-row flex-col justify-between
 }
 
 .utility-btn{
