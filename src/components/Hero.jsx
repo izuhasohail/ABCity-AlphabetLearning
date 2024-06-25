@@ -1,8 +1,14 @@
 import React from "react";
 import { BoxBg } from "./BoxBg";
 import brain from "../assets/brain.png"
-
+import { useRef } from "react";
 const Hero = () => {
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contactUsSection");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <div className="hero-bg min-h-screen">
         <div>
@@ -21,8 +27,9 @@ const Hero = () => {
               We offer multiple learning paths and you can customise your own path for your child. Using AI we help you teach your child fast and better. They can learn to write and speak faster 10x faster
             </p>
             <div class="flex justify-center">
-              <button class="inline-flex text-white bg-gradient-to-r from-cyan-600 to-purple-600 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded text-lg">
-                Learn More
+              <button class="inline-flex text-white bg-gradient-to-r from-cyan-600 to-purple-600 border-0 py-2 px-6 focus:outline-none hover:bg-purple-600 rounded text-lg"
+              onClick={scrollToContact}>
+                Contact Us
               </button>
               <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
                 Start Now

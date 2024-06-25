@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { InfiniteMovingCards } from "./ui/infinite-moving-card";
 
 export function TestimonyPage() {
@@ -18,31 +18,31 @@ export function TestimonyPage() {
 const testimonials = [
   {
     quote:
-      "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.",
-    name: "Charles Dickens",
-    title: "A Tale of Two Cities",
+      "This app is amazing! My child loves tracing the letters and the cheering sounds when they get it right. It's really helped with their letter recognition.",
+    name: "Emily S.",
+    title: "Parent",
   },
   {
     quote:
-      "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep.",
-    name: "William Shakespeare",
-    title: "Hamlet",
+      "I use this app in my classroom, and the kids are always excited to learn their letters. The confetti explosion is their favorite part!",
+    name: "Mrs. Thompson",
+    title: "Kindergarten Teacher",
   },
   {
-    quote: "All that we see or seem is but a dream within a dream.",
-    name: "Edgar Allan Poe",
-    title: "A Dream Within a Dream",
-  },
-  {
-    quote:
-      "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.",
-    name: "Jane Austen",
-    title: "Pride and Prejudice",
+    quote: "I like the cheering sound when I get the letter right. It's fun!",
+    name: "Jake",
+    title: "5-year-old",
   },
   {
     quote:
-      "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.",
-    name: "Herman Melville",
-    title: "Moby-Dick",
+      "As a parent, I appreciate how engaging this app is for my daughter. The sad sound when she makes a mistake is gentle and helps her learn without feeling discouraged.",
+    name: "Michael B.",
+    title: "Parent",
+  },
+  {
+    quote:
+      "My son has improved so much in his letter tracing skills thanks to this app. The feedback sounds make it very interactive.",
+    name: "Linda K.",
+    title: "Parent",
   },
 ];

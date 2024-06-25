@@ -6,7 +6,9 @@ const dotenv = require("dotenv");
 const fileUpload = require('express-fileupload');
 const {AssemblyAI} = require('assemblyai');
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require("@google/generative-ai");
-
+const nodemailer= require('nodemailer')
+const validator= require('validator');
+const colors = require('tailwindcss/colors');
 // Dynamically import node-fetch
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 global.fetch = fetch;
@@ -23,6 +25,46 @@ const MODEL_NAME = "gemini-1.0-pro";
 // Creates a client for AssemblyAI Speech-to-Text
 const client = new AssemblyAI({
   apiKey: process.env.ASSEMBLY_AI_KEY,
+});
+
+// Configure nodemailer
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASS,
+  },
+});
+
+
+// Endpoint to handle contact form submissions
+app.post("/contact", (req, res) => {
+  const { email, message } = req.body;
+
+  console.log(validator.isEmail(email))
+
+  // Validate the email format
+  if (!validator.isEmail(email)) {
+    console.log('invalid formatt!!')
+    return res.status(400).send("Invalid email format.");
+  }
+
+  const mailOptions = {
+    from: email,
+    to: process.env.EMAIL,
+    subject: 'Contact Form Submission',
+    text: `Message from: ${email}\n\n${message}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send("Failed to send message.");
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.status(200).send("Message sent successfully!");
+    }
+  });
 });
 
 // Endpoint to handle motivational messages generation

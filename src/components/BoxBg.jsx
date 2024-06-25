@@ -32,7 +32,7 @@ export function BoxBg() {
       </div> */}
 
       {/* Chat GPT Code */}
-      <div className="flex flex-col sm:flex-row mt-24 w-3/4 sm:w-1/2 lg:w-1/4 mx-auto justify-between items-center bg-gradient-to-r from-cyan-600 to-purple-600 z-20 px-4 py-2 pl-3 rounded-full">
+      <div className="flex flex-col sm:flex-row mt-14 sm:mt-14 md:mt-20 lg:mt-20 w-3/4 sm:w-1/2 lg:w-1/4 mx-auto justify-between items-center bg-gradient-to-r from-cyan-600 to-purple-600 z-20 px-4 py-2 pl-3 rounded-full">
         <div className="bg-neutral-900 px-4 py-2 rounded-full flex gap-2 items-center mb-2 sm:mb-0">
           AI Inside <HiSparkles />
         </div>
