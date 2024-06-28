@@ -9,10 +9,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import cheer from "../../assets/crowd-cheering.mp3";
 import sadSound from "../../assets/sad-sound.mp3"
-import { speakOnLoad, speakWord } from "@/lib/utils";
+import { speakOnLoad, speakWord, startRecIntro } from "@/lib/utils";
 import axios from "axios";
 import { Loader } from "../child/ChildConsole";
-
+import { startIntro } from "@/lib/utils";
 const RecognitionConsole = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currLetter, setCurrLetter] = useState("");
@@ -37,6 +37,10 @@ const RecognitionConsole = () => {
     const randomIndex = Math.floor(Math.random() * alphabetData[currentIndex].word.length);
     setCurrLetterIndex(randomIndex);
   }, [currentIndex]);
+
+    useEffect(() => {
+      startRecIntro();
+    }, []);
 
   // play sound when correct is true for 3 sec
   useEffect(() => {

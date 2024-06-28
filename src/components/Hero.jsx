@@ -2,6 +2,7 @@ import React from "react";
 import { BoxBg } from "./BoxBg";
 import brain from "../assets/brain.png"
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 const Hero = () => {
   const scrollToContact = () => {
     const contactSection = document.getElementById("contactUsSection");
@@ -31,9 +32,9 @@ const Hero = () => {
               onClick={scrollToContact}>
                 Contact Us
               </button>
-              <button class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
+              <Link to={"/child"} class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
                 Start Now
-              </button>
+              </Link>
             </div>
           </div>
           <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">

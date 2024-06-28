@@ -86,3 +86,52 @@ export const startIntro = () => {
     })
     .start();
 };
+
+export const startRecIntro = () => {
+  introJs()
+    .setOptions({
+      steps: [
+        {
+          title: "Welcome",
+          intro: "Lets Recognize letters 👋",
+          tooltipClass: "black-tooltip",
+        },
+        {
+          element: document.querySelector(".speak-button"),
+          intro: "This button speaks the current word.",
+          tooltipClass: "black-tooltip",
+        },
+        {
+          element: document.querySelector(".previous-button"),
+          intro: "This button shows the previous letter.",
+          tooltipClass: "black-tooltip",
+        },
+        {
+          element: document.querySelector(".next-button"),
+          intro: "This button shows the next letter.",
+          tooltipClass: "black-tooltip",
+        },
+        {
+          element: document.querySelector(".check-button"),
+          intro: "This button checks the drawn letter and shows the message.",
+          tooltipClass: "black-tooltip",
+        },
+        {
+          element: document.querySelector(".canvas"),
+          intro: "This is the drawing area.",
+          tooltipClass: "black-tooltip",
+        },
+        {
+          element: document.querySelector(".predictions"),
+          intro: "It shows the predicted letters.",
+          tooltipClass: "black-tooltip",
+        },
+        {
+          element: document.querySelector("#clear-button"),
+          intro: "This button clears the drawing area.",
+          tooltipClass: "black-tooltip",
+        },
+      ],
+    })
+    .start();
+};

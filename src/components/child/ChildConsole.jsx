@@ -179,11 +179,13 @@ const ChildConsole = () => {
   };
 
   const handleLetterSelect = (letter) => {
-    const newIndex = alphabetData.findIndex((item) => item.letter === letter);
-    setCurrentIndex(newIndex);
-    drawingPathsRef.current = [];
-    setIsModalOpen(false);
-  };
+  const newIndex = alphabetData.findIndex((item) => item.letter === letter);
+  setCurrentIndex(newIndex);
+  drawingPathsRef.current = [];
+  setRecognizedLetter(""); // Reset recognized letter
+  setIsModalOpen(false);
+};
+
 
   const processCommand = (command) => {
     const normalizedCommand = command.toLowerCase().trim();
@@ -257,168 +259,168 @@ const ChildConsole = () => {
 
   return (
     <div className="console p-4">
-      {isLoading && <Loader />}
-      <div className="utility-bar-2 flex justify-between items-center mb-4 ">
-        <p className="text-lg font-bold">Learn Alphabets</p>
-        <div className="flex items-center">
-          <Button
-            onClick={() => setIsModalOpen(true)}
-            className="select-button utility-btn"
-          >
-            Select Letter
-          </Button>
-          <button
-            onClick={toggleSpeechRecognition}
-            className={`ml-2 focus:outline-none mic-button ${
-              isListening ? "mic-active" : ""
+    {isLoading && <Loader />}
+    <div className="utility-bar-2 flex justify-between items-center mb-4 ">
+      <p className="text-lg font-bold">Learn Alphabets</p>
+      <div className="flex items-center">
+        <Button
+          onClick={() => setIsModalOpen(true)}
+          className="select-button utility-btn"
+        >
+          Select Letter
+        </Button>
+        <button
+          onClick={toggleSpeechRecognition}
+          className={`ml-2 focus:outline-none mic-button ${
+            isListening ? "mic-active" : ""
+          }`}
+        >
+          <BsFillMicFill
+            className={`w-6 h-6 ${
+              isListening ? "text-bright" : " "
             }`}
-          >
-            <BsFillMicFill
-              className={`w-6 h-6 ${
-                isListening ? "text-bright" : " "
-              }`}
-            />
-          </button>
-        </div>
-      </div>
-      <div className="flex flex-wrap items-center gap-2 mb-4">
-        <Button onClick={handleClear} className="clear-button utility-btn">
-          Clear
-        </Button>
-        <Button
-          onClick={() => {
-            speakWord(word);
-          }}
-          className="speak-button utility-btn"
-        >
-          Speak <HiSpeakerphone />
-        </Button>
-        <Button
-          onClick={handlePrevious}
-          className="previous-button utility-btn"
-        >
-          <FaArrowLeft /> Previous
-        </Button>
-        <Button onClick={handleNext} className="next-button utility-btn">
-          Next <FaArrowRight />
-        </Button>
-      </div>
-      <div className="flex items-center gap-4 my-4">
-        <div className="utility-display">
-          {isLoading ? (
-            <FaSpinner className="animate-spin text-9xl" />
-          ) : (
-            <p className="text-black text-9xl font-bold">
-              {displayLetter}
-            </p>
-          )}
-        </div>
-        <div className="utility-display">
-          <img src={image} className="w-32" alt={letter} />
-        </div>
-      </div>
-      <div className="canvas-div w-full h-96 rounded-md border-dashed border flex items-center justify-center cursor-pointer">
-        <canvas
-          ref={canvasRef}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseOut={handleMouseUp}
-          style={{
-            border: "1px solid #000",
-            borderRadius: "5px",
-            backgroundColor: "#fff",
-            cursor: "pointer",
-            width: "98%",
-            height: "95%",
-          }}
-        />
-      </div>
-      <div className="flex items-center justify-center mt-4 gap-2">
-        <p>Color</p>
-        <label className="rounded-md bg-orange-50 p-1">
-          <input
-            type="color"
-            value={penColor}
-            onChange={(e) => setPenColor(e.target.value)}
-            className="color-input"
           />
-        </label>
-        <input
-          type="range"
-          min="1"
-          max="20"
-          value={penWidth}
-          className="width-input"
-          onChange={(e) => setPenWidth(e.target.value)}
-        />
+        </button>
       </div>
-
-      {isModalOpen && (
-        <div className="modal-bg z-50">
-          <div className="modal-content">
-            <h2 className="text-lg font-bold mb-4">Select a Letter</h2>
-            <div className="grid grid-cols-4 gap-2">
-              {alphabetData.map((item) => (
-                <Button
-                  key={item.letter}
-                  onClick={() => handleLetterSelect(item.letter)}
-                  className="speak-button utility-btn text-2xl"
-                >
-                  {item.letter}
-                </Button>
-              ))}
-            </div>
-            <Button
-              onClick={() => setIsModalOpen(false)}
-              className="mt-4 bg-red-500 text-white p-2 rounded-lg hover:bg-red-800"
-            >
-              Close
-            </Button>
-          </div>
-        </div>
-      )}
-
-      <style jsx>{`
-        .modal-bg {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(0, 0, 0, 0.5);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .modal-content {
-          background-color: #1a202c;
-          width: 70%;
-          max-width: 600px;
-          padding: 20px;
-          border-radius: 8px;
-          overflow-y: auto;
-          max-height: 80%;
-        }
-        .mic-active {
-          animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-          0% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(1.1);
-          }
-          100% {
-            transform: scale(1);
-          }
-        }
-        .text-bright {
-          color: #ff0000;
-        }
-      `}</style>
     </div>
+    <div className="flex flex-wrap items-center gap-2 mb-4">
+      <Button onClick={handleClear} className="clear-button utility-btn">
+        Clear
+      </Button>
+      <Button
+        onClick={() => {
+          speakWord(word);
+        }}
+        className="speak-button utility-btn"
+      >
+        Speak <HiSpeakerphone />
+      </Button>
+      <Button
+        onClick={handlePrevious}
+        className="previous-button utility-btn"
+      >
+        <FaArrowLeft /> Previous
+      </Button>
+      <Button onClick={handleNext} className="next-button utility-btn">
+        Next <FaArrowRight />
+      </Button>
+    </div>
+    <div className="flex items-center gap-4 my-4">
+      <div className="utility-display">
+        {isLoading ? (
+          <FaSpinner className="animate-spin text-9xl" />
+        ) : (
+          <p className="text-black text-9xl font-bold">
+            {displayLetter}
+          </p>
+        )}
+      </div>
+      <div className="utility-display">
+        <img src={image} className="w-32" alt={letter} />
+      </div>
+    </div>
+    <div className="canvas-div w-full h-96 rounded-md border-dashed border flex items-center justify-center cursor-pointer">
+      <canvas
+        ref={canvasRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseOut={handleMouseUp}
+        style={{
+          border: "1px solid #000",
+          borderRadius: "5px",
+          backgroundColor: "#fff",
+          cursor: "pointer",
+          width: "98%",
+          height: "95%",
+        }}
+      />
+    </div>
+    <div className="flex items-center justify-center mt-4 gap-2">
+      <p>Color</p>
+      <label className="rounded-md bg-orange-50 p-1">
+        <input
+          type="color"
+          value={penColor}
+          onChange={(e) => setPenColor(e.target.value)}
+          className="color-input"
+        />
+      </label>
+      <input
+        type="range"
+        min="1"
+        max="20"
+        value={penWidth}
+        className="width-input"
+        onChange={(e) => setPenWidth(e.target.value)}
+      />
+    </div>
+
+    {isModalOpen && (
+      <div className="modal-bg z-50">
+        <div className="modal-content">
+          <h2 className="text-lg font-bold mb-4">Select a Letter</h2>
+          <div className="grid grid-cols-4 gap-2">
+            {alphabetData.map((item) => (
+              <Button
+                key={item.letter}
+                onClick={() => handleLetterSelect(item.letter)}
+                className="speak-button utility-btn text-2xl"
+              >
+                {item.letter}
+              </Button>
+            ))}
+          </div>
+          <Button
+            onClick={() => setIsModalOpen(false)}
+            className="mt-4 bg-red-500 text-white p-2 rounded-lg hover:bg-red-800"
+          >
+            Close
+          </Button>
+        </div>
+      </div>
+    )}
+
+    <style jsx>{`
+      .modal-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-content {
+        background-color: #1a202c;
+        width: 70%;
+        max-width: 600px;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-y: auto;
+        max-height: 80%;
+      }
+      .mic-active {
+        animation: pulse 1.5s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .text-bright {
+        color: #ff0000;
+      }
+    `}</style>
+  </div>
   );
 };
 

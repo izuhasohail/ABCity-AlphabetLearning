@@ -8,7 +8,6 @@ const {AssemblyAI} = require('assemblyai');
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require("@google/generative-ai");
 const nodemailer= require('nodemailer')
 const validator= require('validator');
-const colors = require('tailwindcss/colors');
 // Dynamically import node-fetch
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 global.fetch = fetch;
