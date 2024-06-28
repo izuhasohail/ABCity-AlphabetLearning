@@ -23,6 +23,8 @@ Children have the following features and options to work with
 - Images corresponding to the letter.
 - Input Canvas for allowing users to draw letters.
 - Color and brush size selectors.
+- Speech-enabled selection - Users can enable speech recognition to verbally select letters.
+
 
 #### Recognition
 - Neural networks were used to predict the top 10 predictions of the letters.
